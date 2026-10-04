@@ -1,0 +1,28 @@
+-- Получаем локального игрока и его интерфейс
+local player = game:GetService("Players").LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Создаем основной контейнер (ScreenGui)
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "AntiCheatWarning"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Создаем текстовую панель
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 1, 0) -- Растягиваем на весь экран
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Черный фон
+textLabel.BackgroundTransparency = 0.3 -- Небольшая прозрачность
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Красный текст
+textLabel.TextScaled = true -- Текст автоматически подстраивается под размер экрана
+textLabel.Font = Enum.Font.FredokaOne
+textLabel.Text = "НЕ ИСПОЛЬЗУЙ ЧИТЫ"
+textLabel.Parent = screenGui
+
+-- Опционально: скрипт удалит надпись через 10 секунд
+task.delay(10, function()
+    if screenGui then
+        screenGui:Destroy()
+    end
+end)
